@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkmarx AST Github Action
-        uses: Checkmarx/ast-github-action@2.0.14
+        uses: Checkmarx/ast-github-action@main
         with:
           base_uri: https://eu.ast.checkmarx.net/
           cx_tenant: cx_seg
