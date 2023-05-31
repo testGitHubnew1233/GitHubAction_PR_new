@@ -25,6 +25,4 @@ jobs:
           cx_client_id: ${{ secrets.CLIENT_ID }}
           cx_client_secret: ${{ secrets.SECRET }}
           additional_params: --iac-security-platforms ${{ env.platform }} --debug --scan-types ${{ env.scanTypes }} --sca-filter '!**/test/**' --debug
-          
-          
-          
+         
