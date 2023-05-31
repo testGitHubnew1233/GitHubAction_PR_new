@@ -1,0 +1,69 @@
+FROM golang:1.19.3 AS builder
+
+ARG GIT_USER
+ARG GIT_TOKEN
+
+ARG COMMIT_SHA
+ARG RELEASE_TAG
+
+WORKDIR /app
+
+ENV CGO_ENABLED 0
+ENV GOPRIVATE github.com/checkmarxDev/*,github.com/CheckmarxDev/*
+
+RUN git config \
+    --global \
+    url."https://api:${GIT_TOKEN}@github.com".insteadOf \
+    "https://github.com"
+
+COPY go.mod .
+COPY go.sum .
+
+RUN go mod download \
+    && go install github.com/onsi/ginkgo/v2/ginkgo@v2.8.3 \
+    && go mod tidy \
+    && echo $PATH \
+    && go env \
+    && pwd
+
+# Copy the source from the current directory to the working Directory inside the container
+COPY . .
+
+RUN ginkgo build system/./
+
+FROM amazon/aws-cli:2.9.7 AS download-data
+
+WORKDIR /data
+
+ARG ACCESS_KEY_ID
+ARG SECRET_ACCESS_KEY
+ARG COMMIT_SHA
+
+# Adding this echo for cache-busting purposes since we don't want to cache the following "mc cp" command
+RUN echo $COMMIT_SHA
+
+RUN aws configure set aws_access_key_id ${ACCESS_KEY_ID} --profile default && \
+    aws configure set aws_secret_access_key ${SECRET_ACCESS_KEY} --profile default && \
+    aws s3 cp --recursive s3://system-tests-data ./system-tests-data
+
+FROM golang:1.19.2-alpine3.16 AS runner
+
+LABEL cx.commit-sha=${COMMIT_SHA}
+LABEL cx.release-tag=${RELEASE_TAG}
+
+ENV TEST_TAG ''
+ENV REPORT_PATH ''
+ENV AST_HOSTNAME localhost
+ENV TIMEOUT_IN_MIN 120
+ENV PARALLEL_PROCS 7
+
+WORKDIR /app
+
+COPY --from=builder /app/system/system.test system/
+COPY --from=download-data /data/system-tests-data ./data/files/
+
+RUN go install github.com/onsi/ginkgo/v2/ginkgo@v2.8.3
+RUN mkdir system/testReport
+
+#run the tests when starting the container - removed output temp
+CMD ginkgo --flake-attempts=3 --trace --label-filter="${TEST_TAG}" --skip=${SKIP} --junit-report=${REPORT_PATH} -procs=${PARALLEL_PROCS} system/system.test
