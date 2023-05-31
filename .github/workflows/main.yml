@@ -13,4 +13,4 @@ jobs:
           cx_tenant: cx_seg
           cx_client_id: ${{ secrets.CLIENT_ID }}
           cx_client_secret: ${{ secrets.SECRET }}
-          additional_params: --scan-types "'SAST','SCA'" --sca-filter '!test,!swagger,!docs,!*_test.go,!**/webapp_service/**,!Dockerfile'
+          additional_params: --scan-types SAST,SCA --sca-filter '!test,!swagger,!docs,!*_test.go,!**/webapp_service/**,!Dockerfile'
