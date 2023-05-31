@@ -8,6 +8,7 @@ ARG RELEASE_TAG
 
 WORKDIR /app
 
+
 ENV CGO_ENABLED 0
 ENV GOPRIVATE github.com/checkmarxDev/*,github.com/CheckmarxDev/*
 
