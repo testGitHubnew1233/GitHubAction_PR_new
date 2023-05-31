@@ -1,16 +1,27 @@
-name: Checkmarx Scan
-
-on: [push,pull_request,workflow_dispatch]
-
+name: Checkmarx One Scan
+on:
+  pull_request:
+    branches:
+        - main
+        - master
+        - dev
+        - test_166593
+env:
+  platforms: Dockerfile
+  scanTypes: iac-security,sast,sca
+  threshold: iac-security-high=1=,iac-security-medium=1,iac-securitylow=1    
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkmarx AST Github Action
-        uses: Checkmarx/ast-github-action@main
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Checkmarx One CLI Action
+        uses: checkmarx/ast-github-action@main
         with:
-          base_uri: https://eu.ast.checkmarx.net/
-          cx_tenant: cx_seg
+          project_name: SastAndOsaWithSubFolders_manual
+          cx_tenant: Cx_Seg
+          base_uri: https://eu.ast.checkmarx.net
           cx_client_id: ${{ secrets.CLIENT_ID }}
           cx_client_secret: ${{ secrets.SECRET }}
-          additional_params: --scan-types SAST,SCA --sca-filter '!test,!swagger,!docs,!*_test.go,!**/webapp_service/**,!Dockerfile'
+          additional_params: --iac-security-platforms ${{ env.platform }} --debug --scan-types ${{ env.scanTypes }} --sca-filter '!**/test/**'
