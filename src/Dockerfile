@@ -41,6 +41,7 @@ LABEL cx.release-tag=${RELEASE_TAG}
 COPY --from=build-env /app/sast-metadata /app/sast-metadata
 COPY --from=build-env /app/bases-migration /app/bases-migration
 
+
 COPY --from=build-env /app/api /app/api
 COPY --from=build-env /app/db /app/db
 
