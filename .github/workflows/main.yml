@@ -7,7 +7,7 @@ on:
         - dev
         - test_166593
 env:
-  platforms: Dockerfile
+ # platforms: Dockerfile
   scanTypes: iac-security,sast,sca
   threshold: iac-security-high=1=,iac-security-medium=1,iac-securitylow=1    
 jobs:
@@ -19,10 +19,15 @@ jobs:
       - name: Checkmarx One CLI Action
         uses: checkmarx/ast-github-action@main
         with:
-          project_name: SastAndOsaWithSubFolders_manual
+          project_name: Margarita_ManualScan1
           cx_tenant: Cx_Seg
           base_uri: https://eu.ast.checkmarx.net
           cx_client_id: ${{ secrets.CLIENT_ID }}
           cx_client_secret: ${{ secrets.SECRET }}
-          additional_params: --iac-security-platforms ${{ env.platform }} --debug --scan-types ${{ env.scanTypes }}  --sca-filter '!**\Dockerfile,!**\DockerFile' --debug
+          additional_params: --scan-types ${{ env.scanTypes }}  
+          
+          
+          
+          
+          #--sca-filter '!**\Dockerfile,!**\DockerFile' --debug --iac-security-platforms ${{ env.platform }}
          
