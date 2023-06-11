@@ -19,7 +19,7 @@ jobs:
       - name: Checkmarx One CLI Action
         uses: checkmarx/ast-github-action@main
         with:
-          project_name: Margarita_ManualScan1
+          project_name: Margarita_ManualScan2
           cx_tenant: Cx_Seg
           base_uri: https://eu.ast.checkmarx.net
           cx_client_id: ${{ secrets.CLIENT_ID }}
