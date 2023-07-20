@@ -8,7 +8,8 @@ on:
         - test_166593
 env:
  # platforms: Dockerfile
-  scanTypes: iac-security,sast,sca
+# scanTypes: iac-security,sast,sca
+  scanTypes: sca
   threshold: iac-security-high=1=,iac-security-medium=1,iac-securitylow=1    
 jobs:
   build:
@@ -19,10 +20,10 @@ jobs:
       - name: Checkmarx One CLI Action
         uses: checkmarx/ast-github-action@2.0.18
         with:
-          project_name: Margarita_ManualScan2_new
+          project_name: Margarita_ManualScan2_new1
           cx_tenant: Cx_Seg
           base_uri: https://eu.ast.checkmarx.net
           cx_client_id: ${{ secrets.CLIENT_ID }}
           cx_client_secret: ${{ secrets.SECRET }}
-          additional_params: --scan-types ${{ env.scanTypes }} --sca-filter '!**\Dockerfile'     
+          additional_params: --scan-types ${{ env.scanTypes }} --threshold sca-high=1
          
