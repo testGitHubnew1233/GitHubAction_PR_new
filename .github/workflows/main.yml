@@ -25,5 +25,4 @@ jobs:
           cx_client_id: ${{ secrets.CLIENT_ID }}
           cx_client_secret: ${{ secrets.SECRET }}
           additional_params: --scan-types ${{ env.scanTypes }} --sca-filter '!**\Dockerfile'     
-          #--sca-filter '!**\Dockerfile,!**\DockerFile' --debug --iac-security-platforms ${{ env.platform }}
          
