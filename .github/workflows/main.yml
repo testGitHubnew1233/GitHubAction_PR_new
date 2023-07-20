@@ -17,9 +17,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Checkmarx One CLI Action
-        uses: checkmarx/ast-github-action@main
+        uses: checkmarx/ast-github-action@2.0.18
         with:
-          project_name: Margarita_ManualScan2
+          project_name: Margarita_ManualScan2_new
           cx_tenant: Cx_Seg
           base_uri: https://eu.ast.checkmarx.net
           cx_client_id: ${{ secrets.CLIENT_ID }}
