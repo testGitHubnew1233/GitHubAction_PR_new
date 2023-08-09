@@ -26,3 +26,4 @@ jobs:
           cx_client_secret: ${{ secrets.SECRET }}
           additional_params: --scan-types ${{ env.scanTypes }} --sca-filter '!**\Dockerfile'     
          
+     
