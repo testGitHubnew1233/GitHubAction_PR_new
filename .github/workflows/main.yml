@@ -8,8 +8,7 @@ on:
         - test_166593
 env:
  # platforms: Dockerfile
-# scanTypes: iac-security,sast,sca
-  scanTypes: sca
+  scanTypes: iac-security,sast,sca
   threshold: iac-security-high=1=,iac-security-medium=1,iac-securitylow=1    
 jobs:
   build:
