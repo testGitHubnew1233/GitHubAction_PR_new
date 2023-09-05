@@ -25,6 +25,6 @@ jobs:
           base_uri: https://eu.ast.checkmarx.net
           cx_client_id: ${{ secrets.CLIENT_ID }}
           cx_client_secret: ${{ secrets.SECRET }}
-          additional_params: --scan-types ${{ env.scanTypes }} --threshold sca-high=1
+          additional_params: --scan-types ${{ env.scanTypes }} --policy
          
      
