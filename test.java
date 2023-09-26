@@ -12,6 +12,10 @@ public class SQLInjection
 
 	 }
 
+
+
+
+	
 	public void high(TextBox tb)
 	{
 		string input = Console.ReadLine();
