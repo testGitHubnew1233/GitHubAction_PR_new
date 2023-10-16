@@ -15,5 +15,9 @@ public class SQLInjection
 		string input = Console.ReadLine();
 		tb.Text = input;
 	}
+String accountNumber = args[1];
+		String query = "SELECT * FROM user_data WHERE acountNumber = " + accountNumber; 
 
+String accountNumber = args[1];
+		String query = "SELECT * FROM user_data WHERE acountNumber = " + accountNumber; 
 }
