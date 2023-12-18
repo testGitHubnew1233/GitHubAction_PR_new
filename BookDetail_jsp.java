@@ -55,6 +55,13 @@ public class BookDetail_jsp extends HttpJspBase {
     return (rs);
   }
 
+  //Add new vuln
+
+   java.sql.ResultSet openrs(java.sql.Statement stat, String sql) throws java.sql.SQLException {
+    java.sql.ResultSet rs = stat.executeQuery(sql);
+    return (rs);
+  }
+  
   String dLookUp(java.sql.Statement stat, String table, String fName, String where) {
     java.sql.Connection conn1 = null;
     java.sql.Statement stat1 = null;
