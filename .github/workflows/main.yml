@@ -7,6 +7,8 @@ on:
         - master
         - dev
         - test_166593
+        - margaritalm-patch-3
+        - margaritalm-patch-5
 env:
  # platforms: Dockerfile
   scanTypes: iac-security,sast,sca
