@@ -6,9 +6,7 @@ on:
         - main
         - master
         - dev
-        - test_166593
-        - margaritalm-patch-3
-        - margaritalm-patch-5
+        - NewMainNotExp
 env:
  # platforms: Dockerfile
   scanTypes: iac-security,sast,sca
