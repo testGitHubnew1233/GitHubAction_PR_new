@@ -17,7 +17,7 @@ public class Checkmarkscan {
              {
         try {
             String username = request.getParameter("username");
-            Connection conn = DriverManager.getConnection("jdbc:", username, "password");
+//            Connection conn = DriverManager.getConnection("jdbc:", username, "password");
 // Create a statement from database connection
             Statement statement = conn.createStatement();
 // Create unsafe query by concatenating user defined data with query string
