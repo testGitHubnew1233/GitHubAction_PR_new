@@ -110,6 +110,9 @@ public class BookDetail_jsp extends HttpJspBase {
     return aFields;
   }
 
+
+  
+
   java.util.Hashtable getRecordToHash ( java.sql.ResultSet rs, java.util.Hashtable rsHash, String[] aFields ) throws java.sql.SQLException {
     for ( int iF = 0; iF < aFields.length; iF++ ) {
       rsHash.put( aFields[iF], getValue(rs, aFields[iF]));
