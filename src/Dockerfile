@@ -22,7 +22,7 @@ RUN go mod download
 
 # COPY the source code as the last step
 COPY . .
-
+USER myuser
 # Build the Go app
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -a -installsuffix cgo -o sast-metadata cmd/sastmetadata/main.go cmd/sastmetadata/config.go
 
@@ -45,4 +45,11 @@ COPY --from=build-env /app/bases-migration /app/bases-migration
 COPY --from=build-env /app/api /app/api
 COPY --from=build-env /app/db /app/db
 
+
+RUN apk add --no-cache git \
+ && git config \
+  --global \
+  url."https://api:${GIT_TOKEN}@github.com".insteadOf \
+  "https://github.com"
+  
 ENTRYPOINT ["/app/sast-metadata"]
