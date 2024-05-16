@@ -27,6 +27,10 @@ jobs:
           cx_client_secret: ${{ secrets.SECRET }}
           additional_params: --debug
     #      additional_params: --scan-types ${{ env.scanTypes }} --file-filter "!src/, !.git/, !*.java, !*.iml, !*.json, !*.jar" --debug
+
+
+
+    
          
      
 
