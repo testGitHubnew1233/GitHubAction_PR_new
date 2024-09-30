@@ -237,6 +237,9 @@ namespace SDKSample
         private readonly string _annotContentType =
             "application/vnd.ms-package.annotations+xml";
 
+
+
+        
         #endregion // private variables
 
     }// end:class AnnotationsHelperXps
